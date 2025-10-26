@@ -1,0 +1,56 @@
+# ==========================================
+# GITIGNORE PRINCIPAL - honeypot-coffee-project
+# ==========================================
+
+# === Node Modules (ambos lados) ===
+node_modules/
+*/node_modules/
+honeypot-backend/node_modules/
+honeypot-frontend/node_modules/
+
+# === Logs del Backend ===
+honeypot-backend/access.log
+honeypot-backend/login_attempts.log
+honeypot-backend/*.log
+
+# === Base de Datos (se genera automática) ===
+honeypot-backend/database.db
+honeypot-backend/*.db
+honeypot-backend/*.sqlite
+honeypot-backend/*.sqlite3
+
+# === Environment Variables ===
+.env
+.env.local
+.env.*.local
+honeypot-backend/.env
+honeypot-frontend/.env
+
+# === Builds de Frontend ===
+honeypot-frontend/dist/
+honeypot-frontend/build/
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Package Managers ===
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# === Temporales ===
+tmp/
+temp/
+*.tmp
+
+# === Coverage ===
+coverage/
+.nyc_output/
