@@ -72,6 +72,7 @@ db.serialize(() => {
 // Detectar SQL Injection
 function detectSQLInjection(input) {
     const sqlPatterns = [
+        // Patrones básicos
         "' OR '1'='1",
         "' OR 1=1--",
         "admin'--",
@@ -90,7 +91,68 @@ function detectSQLInjection(input) {
         "admin' /*",
         "' UNION ALL SELECT",
         "' AND 1=1--",
-        "' AND 'a'='a"
+        "' AND 'a'='a",
+        
+        // Patrones SQLmap y avanzados
+        "AND 1=1",
+        "OR 1=1",
+        "ORDER BY",
+        "GROUP BY",
+        "UNION SELECT",
+        "UNION ALL SELECT",
+        "HAVING 1=1",
+        "SELECT FROM",
+        "INSERT INTO",
+        "DELETE FROM",
+        "UPDATE SET",
+        "DROP TABLE",
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "INFORMATION_SCHEMA",
+        "SLEEP(", 
+        "BENCHMARK(",
+        "WAITFOR DELAY",
+        "pg_sleep(",
+        "AND SLEEP(",
+        "OR SLEEP(",
+        "EXTRACTVALUE",
+        "UPDATEXML",
+        "AND EXTRACTVALUE",
+        "OR EXTRACTVALUE",
+        "AND 1=",
+        "OR 1=",
+        "' AND '",
+        "' OR '",
+        "CONCAT(",
+        "CHAR(",
+        "0x",
+        "@@version",
+        "@@datadir",
+        "user()",
+        "database()",
+        "version()",
+        // Boolean-based blind
+        "AND 1=2",
+        "AND 1=0",
+        "OR 1=2",
+        " AND ",
+        " OR ",
+        // Time-based blind
+        "RLIKE SLEEP",
+        "AND (SELECT",
+        "OR (SELECT",
+        // Stacked queries
+        ";SELECT",
+        ";WAITFOR",
+        ";EXEC",
+        // Error-based
+        "AND ROW(",
+        "GTID_SUBSET",
+        "JSON_KEYS",
+        // Comments
+        "/**/",
+        "#",
+        "-- "
     ];
     
     const combinedInput = String(input).toLowerCase();
